@@ -69,6 +69,28 @@
     double vdsp_n_secs = timer.toc();
     cout << "vDSP took " << vdsp_n_secs << " seconds." << endl;
     cout << "vDSP is " << cv_n_secs/vdsp_n_secs << " times faster than OpenCV!!!" << endl;
+    
+    // Final bit of example code for writing a file out
+    // in assignment 1 we want you to change this code snippet
+    // so you can write data out from your App.
+    //
+    //
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    //make a file name to write the data to using the documents directory:
+    NSString *fileName = [NSString stringWithFormat:@"%@/example.arma",
+                          documentsDirectory];
+    
+    // Get the full path and name of the file
+    const char *fname = [fileName UTF8String];
+    
+    // Randomly initialize a variable and then save it
+    arma::fmat tmp(3,3); tmp.randn();
+    tmp.save(fname);
+    cout << "writing out example.arma to the Documents directory!!!" << endl;
+        
 }
 
 - (void)didReceiveMemoryWarning {
